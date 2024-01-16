@@ -1,12 +1,19 @@
 import { StatusBar } from 'expo-status-bar';
 import { Button, ImageBackground, StyleSheet, Text, TextInput, View } from 'react-native';
+import { useState } from 'react';
 
 export default function App() {
+
+  const [newGoal, setNewGoal] = useState("")
+  function textChangeHandler(enteredtext) {
+    setNewGoal(enteredtext)
+    console.log(newGoal)
+  }
   return (
     <View style={styles.container}>
       <View style={styles.inputcontainer}>
-        <TextInput placeholder='El Goals' style={styles.textInput}></TextInput>
-        <Button title='Añadir Meta' color={'#76d'} />
+        <TextInput placeholder='El Goals' style={styles.textInput} onChangeText={textChangeHandler} />
+        <Button title='Añadir Goal' color={'#76d'} />
       </View>
       <StatusBar style="auto" />
       <View style={styles.goalcontainer}>
