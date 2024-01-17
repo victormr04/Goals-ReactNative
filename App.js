@@ -5,20 +5,29 @@ import { useState } from 'react';
 export default function App() {
 
   const [newGoal, setNewGoal] = useState("")
+  const [goalList, setGoalList] = useState([])
   function textChangeHandler(enteredtext) {
     setNewGoal(enteredtext)
     console.log(newGoal)
+  }
+  async function addGoal() {
+    if (newGoal.trim() != "") {
+      setGoalList((prevgoals) => [...prevgoals, newGoal])
+
+    }
   }
   return (
     <View style={styles.container}>
       <View style={styles.inputcontainer}>
         <TextInput placeholder='El Goals' style={styles.textInput} onChangeText={textChangeHandler} />
-        <Button title='Añadir Goal' color={'#76d'} />
+        <Button title='Añadir Goal' color={'#76d'} onPress={addGoal} />
       </View>
       <StatusBar style="auto" />
       <View style={styles.goalcontainer}>
         <Text>Lista de metas: </Text>
-
+        {goalList.map((goal, index) =>
+          <Text key={index}>{goal}</Text>
+        )}
       </View>
     </View>
 
